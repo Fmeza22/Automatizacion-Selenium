@@ -25,16 +25,7 @@ public class BaseTests {
     protected LoginPage loginPage;
     protected TableroPage tableroPage;
     protected ListaPage listaPage;
-    /*
-        public void parametrizar() {
 
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     @BeforeClass
     public void setUp() {
 

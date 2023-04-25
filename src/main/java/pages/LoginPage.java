@@ -24,7 +24,8 @@ public class LoginPage {
     private By btnContinuar = By.id("login");
     private By btnLogin = By.id("login-submit");
 
-    private By verificarLogin = By.className("DweEFaF5owOe02");
+    private By verificarCorreo = By.className("Ej7WGzTnvdxL7I");
+    private By verificarUsuario = By.className("DweEFaF5owOe02");
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -63,6 +64,23 @@ public class LoginPage {
     public void setPassword(String password){
 
         driver.findElement(passwordField).sendKeys(password);
+    }
+    public String verificarLogin(){
+        driver.findElement(verificarUsuario).click();
+
+     //   System.out.println(g);
+    return driver.findElement(verificarCorreo).getText();
+    }
+
+
+    public String getProperties(String valorPropiedad){
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileReader("src/test/resources/config.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+       return properties.getProperty(valorPropiedad);
     }
 
 }
