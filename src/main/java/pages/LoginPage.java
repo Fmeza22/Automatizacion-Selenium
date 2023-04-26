@@ -70,6 +70,7 @@ public class LoginPage {
 
      //   System.out.println(g);
     return driver.findElement(verificarCorreo).getText();
+
     }
 
 
