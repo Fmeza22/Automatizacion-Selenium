@@ -19,23 +19,20 @@ public class LoginTests extends BaseTests {
         String USERNAME = loginPage.getProperties("username");
         String PASSWORD =  loginPage.getProperties("password_user");
         loginPage.loguear(USERNAME);
-        //colocar assertions (verificar usuarios)
         loginPage.implicitWait();
         loginPage.login(PASSWORD);
-        var a = loginPage.verificarLogin();
-        Assert.assertEquals(a,USERNAME, "El usuario esperado");
-        System.out.println("Inicio de Sesión correcto del usuario:"+ a);
+        var usuarioLogueado = loginPage.verificarLogin();
+        Assert.assertEquals(usuarioLogueado,USERNAME, "Usuario esperado");
+        System.out.println("Inicio de Sesión correcto del usuario:"+ usuarioLogueado);
     }
 
     @Test(priority = 2)
     public void testTableroCrear() {
 
-
         String NAME_TABLERO = loginPage.getProperties("nameTablero");
         tableroPage.crearTablero(NAME_TABLERO);
         String tituloObtenido= driver.getTitle();
         System.out.println("Titulo Obtenido: "+ tituloObtenido);
-       // Assert.assertEquals("a",tituloObtenido, "Al Validar el titulo");
 
     }
 
@@ -51,5 +48,8 @@ public class LoginTests extends BaseTests {
 
         String NAME_TARJETA =  loginPage.getProperties("nameTarjeta");
         listaPage.crearTarjeta(NAME_TARJETA);
+        var tituloNuevaTarjeta = listaPage.validarTarjeta();
+        Assert.assertEquals(NAME_TARJETA,tituloNuevaTarjeta);
+        System.out.println("Nueva Tarjeta:" + tituloNuevaTarjeta);
     }
 }

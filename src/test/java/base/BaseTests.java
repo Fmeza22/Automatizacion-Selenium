@@ -58,11 +58,11 @@ public class BaseTests {
         if(ITestResult.FAILURE == result.getStatus())
         {
             var camera = (TakesScreenshot)driver;
-
-
+           var consecutivo = Math.floor(Math.random()*10);
+            //System.out.println(consecutivo);
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try{
-                Files.move(screenshot.toPath(), new File("resources/screenshots/" + result.getName() + ".png").toPath());
+                Files.move(screenshot.toPath(), new File("resources/screenshots/" + result.getName() + "_" + consecutivo + ".png").toPath());
             }catch(IOException e){
                 e.printStackTrace();
             }

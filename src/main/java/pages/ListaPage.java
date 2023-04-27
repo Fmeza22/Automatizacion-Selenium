@@ -13,6 +13,8 @@ public class ListaPage {
     private By tituloTarjeta = By.className("list-card-composer-textarea");
     private By nuevaTarjeta = By.className("js-add-card");
     private By submitTarjeta = By.className("nch-button");
+    private By verificarTarjeta = By.className("list-card-title");
+
     public ListaPage(WebDriver driver){
         this.driver = driver;
     }
@@ -32,6 +34,11 @@ public class ListaPage {
         //Escribir nombre tarjeta
         driver.findElement(tituloTarjeta).sendKeys(titTarjeta);
         driver.findElement(submitTarjeta).click();
+
+    }
+    public String validarTarjeta (){
+        String texto = driver.findElement(verificarTarjeta).getText();
+        return texto;
 
     }
 }
