@@ -28,17 +28,14 @@ public class ListaPage {
         driver.findElement(agregarLista).click();
     }
     public void crearTarjeta(String titTarjeta) {
-
         //Agregar Tarjeta
         driver.findElement(agregarTarjeta).click();
         //Escribir nombre tarjeta
         driver.findElement(tituloTarjeta).sendKeys(titTarjeta);
         driver.findElement(submitTarjeta).click();
-
     }
     public String validarTarjeta (){
         String texto = driver.findElement(verificarTarjeta).getText();
         return texto;
-
     }
 }

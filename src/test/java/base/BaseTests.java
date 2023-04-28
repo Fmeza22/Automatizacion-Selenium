@@ -47,10 +47,7 @@ public class BaseTests {
     }
 
 
-    @AfterClass
-    public void tearDown() {
-        //driver.quit();
-    }
+
 
     @AfterMethod
     public void capturaPantallaTestFallido(ITestResult result){
@@ -68,6 +65,9 @@ public class BaseTests {
             }
         }
     }
-
+   /* @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }*/
 
 }
