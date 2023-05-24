@@ -1,13 +1,10 @@
 package pages;
 
-import com.google.common.collect.FluentIterable;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
@@ -18,12 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginPage {
 
-    private WebDriver driver;
+    public WebDriver driver;
     private By usernameField = By.id("user");
     private By passwordField = By.id("password");
     private By btnContinuar = By.id("login");
     private By btnLogin = By.id("login-submit");
-
     private By verificarCorreo = By.className("Ej7WGzTnvdxL7I");
     private By verificarUsuario = By.className("DweEFaF5owOe02");
 
@@ -32,31 +28,40 @@ public class LoginPage {
     }
 
 
-    public LoginPage loguear(String usernameLogin){
+    public LoginPage loguear(String usernameLogin,WebDriver driver){
         this.setUsername(usernameLogin);
         driver.findElement(btnContinuar).click();
-       // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+      //  WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        //wait.until(ExpectedConditions.visibilityOf(driver.findElement(passwordField)));
 
         return new LoginPage(driver);
     }
-    public LoginPage login(String passwordLogin){
+    public LoginPage login(String passwordLogin, WebDriver dr){
 
         this.setPassword(passwordLogin);
-        driver.findElement(btnLogin).click();
-
-        return new LoginPage(driver);
+        dr.findElement(btnLogin).click();
+        return new LoginPage(dr);
     }
-    public void implicitWait(){
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        driver.get(properties.getProperty("url_base"));
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    public void WaitPass(WebDriver dr, String url){
 
+        driver.get(url);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+       //WebDriverWait ewait = new WebDriverWait(dr,5);
+       // ewait.until(ExpectedConditions.visibilityOf(passwordField.findElement(dr)));
     }
+    public void WaitVerificarU(WebDriver dr){
+
+        WebDriverWait ewait = new WebDriverWait(dr,5);
+        ewait.until(ExpectedConditions.visibilityOf(verificarUsuario.findElement(dr)));
+    }
+    public void WaitVerificarC(WebDriver dr){
+
+        WebDriverWait ewait = new WebDriverWait(dr,10);
+        ewait.until(ExpectedConditions.visibilityOf(verificarCorreo.findElement(dr)));
+    }
+
+
     public void setUsername(String username){
         driver.findElement(usernameField).sendKeys(username);
     }
@@ -65,23 +70,18 @@ public class LoginPage {
 
         driver.findElement(passwordField).sendKeys(password);
     }
-    public String verificarLogin(){
-        driver.findElement(verificarUsuario).click();
+    public String verificarLogin(WebDriver dr){
+        dr.findElement(verificarUsuario).click();
 
      //   System.out.println(g);
-    return driver.findElement(verificarCorreo).getText();
+    return dr.findElement(verificarCorreo).getText();
+
+    }
+    public void VisiblePassword(){
+        driver.findElement(passwordField).click();
 
     }
 
 
-    public String getProperties(String valorPropiedad){
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-       return properties.getProperty(valorPropiedad);
-    }
 
 }

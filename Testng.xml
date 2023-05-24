@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite" >
+    <parameter name = "URL" value = "https://trello.com/es/login"/>
+    <parameter name = "Username" value = "francellysmeza22@gmail.com"/>
+    <parameter name="browserName" value="Chrome"/>
+    <parameter name = "PasswordUser" value = "Kmzwa8awaa"/>
+    <parameter name = "NameTablero" value = "Tablero TestNG"/>
+    <parameter name = "NameLista" value = "Lista1"/>
+    <parameter name = "NameTarjeta" value = "Tarjeta1"/>
+
+    <listeners>
+
+        <listener class-name="singleton.Driver"/>
+
+    </listeners>
+
+    <test name = "Test On Browser">
+            <classes>
+                <class name = "singleton.LocalDriver"/>
+            </classes>
+        </test>
+
+    <!-- Login -->
+    <test name = "testSuccessfulLogin">
+        <classes>
+            <class name = "test.LoginTests"/>
+        </classes>
+    </test>
+    <!-- Test Crear Tablero-->
+    <test name = "testTableroCrear">
+        <classes>
+            <class name = "test.TableroTests"/>
+        </classes>
+    </test>
+    <!-- Test Crear Lista-->
+    <test name = "testTLista">
+        <classes>
+            <class name = "test.ListaTests"/>
+        </classes>
+    </test>
+    <!-- Test Crear Tarjeta
+    <test name = "testTarjetaCrear">
+        <classes>
+            <class name = "test.ListaTests"/>
+        </classes>
+    </test>-->
+</suite> <!-- Cross Browser Testing -->
+
+
+
