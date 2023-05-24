@@ -1,13 +1,14 @@
 package base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 import pages.ListaPage;
 import pages.LoginPage;
 import pages.TableroPage;
@@ -26,36 +27,48 @@ public class BaseTests {
     protected TableroPage tableroPage;
     protected ListaPage listaPage;
 
-    @BeforeClass
-    public void setUp() {
 
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(properties.getProperty("url_base"));
-       // driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
+    //@BeforeClass
+   // @Parameters( {"URL", "BrowserType"} )
+    public void setUp(String url, String browserType) {
+
+/*
+            if (browserType.equalsIgnoreCase("Firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+
+                driver = new FirefoxDriver(getChromeOptions());
+
+            } else if (browserType.equalsIgnoreCase("Chrome")) {
+                //Como ahora uso el manager, la implementación que encuentro no se como aplicarla
+                //  ChromeOptions options = new ChromeOptions();
+                // options.addArguments("headless");
+
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(getChromeOptions());
+
+            }
+            //driver = WebDriverManager.chromedriver().create();
+            driver.manage().window().maximize();
+            driver.get(url);
+
+
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         tableroPage = new TableroPage(driver);
         listaPage = new ListaPage(driver);
+        */
+
     }
-
-
 
 
     @AfterMethod
     public void capturaPantallaTestFallido(ITestResult result){
 
-        if(ITestResult.FAILURE == result.getStatus())
+       /* if(ITestResult.FAILURE == result.getStatus())
         {
             var camera = (TakesScreenshot)driver;
-           var consecutivo = Math.floor(Math.random()*10);
+            var consecutivo = Math.floor(Math.random()*10);
             //System.out.println(consecutivo);
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try{
@@ -63,9 +76,10 @@ public class BaseTests {
             }catch(IOException e){
                 e.printStackTrace();
             }
-        }
+        }*/
     }
-   /* @AfterClass
+   /*
+    @AfterClass
     public void tearDown() {
         driver.quit();
     }*/
