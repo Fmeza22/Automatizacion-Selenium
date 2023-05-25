@@ -13,7 +13,7 @@ superior derecha del navegador, opción ayuda --> Información de Google Chrome)
 
 ####Pasos a seguir:
 Definir Variables:
-En el archivo config.properties se encuentran definidas las variables Globales que nos permiten realizar los 
+En el archivo Testng.xml se encuentran definidas las variables Globales que nos permiten realizar los 
 test requeridos, son las siguientes y su respectivo uso:
 -url_base= La url del sitio que queremos automatizar, en este caso la de trello (está asignada)
 -username= correo del usuario (previamente registrado en la plataforma)
@@ -21,6 +21,7 @@ test requeridos, son las siguientes y su respectivo uso:
 -nameTablero= nombre deseado al tablero de prueba
 -nameLista = nombre deseado a la lista de prueba
 -nameTarjeta= nombre deseado a la tarjeta de prueba
+-browserName= puede definir el navegador donde quiere ejecutar la prueba
 
 Luego de asignar los valores a la variable, podrá ejecutar el proyecto.
 

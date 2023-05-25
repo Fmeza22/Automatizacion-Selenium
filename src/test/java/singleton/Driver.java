@@ -17,7 +17,6 @@ public class Driver implements IInvokedMethodListener{
             if (driver ==null){
             String browserName = method.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
             driver = LocalDriver.createInstance(browserName);
-            // set the singleton instance
             Singleton.setWebDriver(driver);
         }
         }
