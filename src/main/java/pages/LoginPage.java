@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginPage {
 
-    public WebDriver driver;
+    //public WebDriver driver;
     private By usernameField = By.id("user");
     private By passwordField = By.id("password");
     private By btnContinuar = By.id("login");
@@ -23,65 +23,51 @@ public class LoginPage {
     private By verificarCorreo = By.className("Ej7WGzTnvdxL7I");
     private By verificarUsuario = By.className("DweEFaF5owOe02");
 
-    public LoginPage(WebDriver driver){
+    /*public LoginPage(WebDriver driver){
         this.driver = driver;
+    }*/
+
+
+    public void  loguear(String usernameLogin,WebDriver dr){
+        this.setUsername(usernameLogin,dr);
+        dr.findElement(btnContinuar).click();
+       // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        /*WebDriverWait ewait = new WebDriverWait(driver,5);
+        ewait.until(ExpectedConditions.visibilityOf(passwordField.findElement(driver)));*/
+        //return new LoginPage(dr);
     }
+    public void login(String passwordLogin, WebDriver dr){
 
-
-    public LoginPage loguear(String usernameLogin,WebDriver driver){
-        this.setUsername(usernameLogin);
-        driver.findElement(btnContinuar).click();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      //  WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
-        //wait.until(ExpectedConditions.visibilityOf(driver.findElement(passwordField)));
-
-        return new LoginPage(driver);
-    }
-    public LoginPage login(String passwordLogin, WebDriver dr){
-
-        this.setPassword(passwordLogin);
+        this.setPassword(passwordLogin, dr);
         dr.findElement(btnLogin).click();
-        return new LoginPage(dr);
+        //return new LoginPage(dr);
     }
-    public void WaitPass(WebDriver dr, String url){
 
-        driver.get(url);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-       //WebDriverWait ewait = new WebDriverWait(dr,5);
-       // ewait.until(ExpectedConditions.visibilityOf(passwordField.findElement(dr)));
-    }
     public void WaitVerificarU(WebDriver dr){
 
-        WebDriverWait ewait = new WebDriverWait(dr,5);
+        WebDriverWait ewait = new WebDriverWait(dr,20);
         ewait.until(ExpectedConditions.visibilityOf(verificarUsuario.findElement(dr)));
     }
-    public void WaitVerificarC(WebDriver dr){
-
+    public void WaitVerificarPass(WebDriver dr, String url){
+        dr.get(url);
         WebDriverWait ewait = new WebDriverWait(dr,10);
-        ewait.until(ExpectedConditions.visibilityOf(verificarCorreo.findElement(dr)));
+        ewait.until(ExpectedConditions.visibilityOf(passwordField.findElement(dr)));
     }
 
-
-    public void setUsername(String username){
-        driver.findElement(usernameField).sendKeys(username);
+    public void setUsername(String username, WebDriver dr){
+        dr.findElement(usernameField).sendKeys(username);
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password, WebDriver dr){
 
-        driver.findElement(passwordField).sendKeys(password);
+        dr.findElement(passwordField).sendKeys(password);
     }
     public String verificarLogin(WebDriver dr){
+
         dr.findElement(verificarUsuario).click();
 
-     //   System.out.println(g);
     return dr.findElement(verificarCorreo).getText();
 
     }
-    public void VisiblePassword(){
-        driver.findElement(passwordField).click();
-
-    }
-
-
 
 }

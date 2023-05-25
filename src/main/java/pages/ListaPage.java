@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ListaPage {
-    private WebDriver driver;
+   // private WebDriver driver;
 
 
 
@@ -19,27 +19,27 @@ public class ListaPage {
     private By submitTarjeta = By.className("nch-button");
     private By verificarTarjeta = By.className("list-card-title");
 
-    public ListaPage(WebDriver driver){
+    /*public ListaPage(WebDriver driver){
         this.driver = driver;
-    }
+    }*/
 
 
 
-    public void crearLista(String titLista) {
+    public void crearLista(String titLista,WebDriver dr) {
         //Escribir lista
-        driver.findElement(TituloLista).sendKeys(titLista);
+        dr.findElement(TituloLista).sendKeys(titLista);
         //Crear lista
-        driver.findElement(agregarLista).click();
+        dr.findElement(agregarLista).click();
     }
-    public void crearTarjeta(String titTarjeta) {
+    public void crearTarjeta(String titTarjeta, WebDriver dr) {
         //Agregar Tarjeta
-        driver.findElement(agregarTarjeta).click();
+        dr.findElement(agregarTarjeta).click();
         //Escribir nombre tarjeta
-        driver.findElement(tituloTarjeta).sendKeys(titTarjeta);
-        driver.findElement(submitTarjeta).click();
+        dr.findElement(tituloTarjeta).sendKeys(titTarjeta);
+        dr.findElement(submitTarjeta).click();
     }
-    public String validarTarjeta (){
-        String texto = driver.findElement(verificarTarjeta).getText();
+    public String validarTarjeta (WebDriver dr){
+        String texto = dr.findElement(verificarTarjeta).getText();
         return texto;
     }
 
@@ -49,7 +49,7 @@ public class ListaPage {
         WebDriverWait ewait = new WebDriverWait(dr,5);
         ewait.until(ExpectedConditions.visibilityOf(agregarTarjeta.findElement(dr)));
 
-        driver.findElement(submitTarjeta).click();
+        dr.findElement(submitTarjeta).click();
     }
     public void WaitSubmitT(WebDriver dr){
 

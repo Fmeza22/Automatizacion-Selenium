@@ -1,12 +1,12 @@
 package singleton;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
@@ -26,7 +26,7 @@ public class LocalDriver {
     public static ListaPage listaPage;
 
     public static WebDriver createInstance(String browserName){
-        browserName = "Chrome";
+
 
         if (browserName.equalsIgnoreCase("Firefox")) {
            WebDriverManager.firefoxdriver().setup();
@@ -37,15 +37,16 @@ public class LocalDriver {
             options.setHeadless(false);
 
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
 
         }
-        driver.manage().window().maximize();
+       //Dimension dimension = new Dimension(1920,1080);
+        driver.manage().window().setSize(new Dimension(1440, 900));;
         driver.get("https://trello.com/es/login");
-      //  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        loginPage = new LoginPage(driver);
-        tableroPage = new TableroPage(driver);
-        listaPage = new ListaPage(driver);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        loginPage = new LoginPage();
+        tableroPage = new TableroPage();
+        listaPage = new ListaPage();
         return driver;
     }
     @AfterMethod
@@ -64,13 +65,6 @@ public class LocalDriver {
             }
         }
     }
-   /*
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
-    }*/
-
-
     private ChromeOptions getChromeOptions(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");

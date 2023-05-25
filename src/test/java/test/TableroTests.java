@@ -20,13 +20,12 @@ public class TableroTests extends LocalDriver {
     @Parameters( {"NameTablero"} )
     public void testTableroCrear(String tablero) {
         driver = Singleton.getDriver();
-        tableroPage = new TableroPage(driver);
-        System.out.println("Driver TableroPage:"+ driver);
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        //String NAME_TABLERO = loginPage.getProperties("nameTablero");
+        tableroPage = new TableroPage();
+        tableroPage.WaitBtCrearTMenu(driver);
         tableroPage.crearTablero(tablero, driver);
+        //tableroPage.WaitBtCrearT(driver);
         String tituloObtenido= driver.getTitle();
-        System.out.println("Titulo Obtenido: "+ tituloObtenido);
+       Assert.assertEquals(tituloObtenido,"Tableros | Trello", "Titulo Correcto" );
 
     }
 

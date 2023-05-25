@@ -3,7 +3,6 @@
 <suite name="Default Suite" >
     <parameter name = "URL" value = "https://trello.com/es/login"/>
     <parameter name = "Username" value = "francellysmeza22@gmail.com"/>
-    <parameter name="browserName" value="Chrome"/>
     <parameter name = "PasswordUser" value = "Kmzwa8awaa"/>
     <parameter name = "NameTablero" value = "Tablero TestNG"/>
     <parameter name = "NameLista" value = "Lista1"/>
@@ -18,6 +17,7 @@
     <test name = "Test On Browser">
             <classes>
                 <class name = "singleton.LocalDriver"/>
+
             </classes>
         </test>
 
@@ -25,6 +25,8 @@
     <test name = "testSuccessfulLogin">
         <classes>
             <class name = "test.LoginTests"/>
+
+            <parameter name="browserName" value="Chrome"/>
         </classes>
     </test>
     <!-- Test Crear Tablero-->
@@ -39,12 +41,6 @@
             <class name = "test.ListaTests"/>
         </classes>
     </test>
-    <!-- Test Crear Tarjeta
-    <test name = "testTarjetaCrear">
-        <classes>
-            <class name = "test.ListaTests"/>
-        </classes>
-    </test>-->
 </suite> <!-- Cross Browser Testing -->
 
 

@@ -27,10 +27,9 @@ public class LoginTests extends LocalDriver {
     public void testSuccessfulLogin(String user, String password, String url) {
 
         loginPage.loguear(user, driver);
-        loginPage.WaitPass(driver, url);
+        loginPage.WaitVerificarPass(driver,url);
         loginPage.login(password, driver);
         loginPage.WaitVerificarU(driver);
-        //loginPage.WaitVerificarC(driver);
         var usuarioLogueado = loginPage.verificarLogin(driver);
         Assert.assertEquals(usuarioLogueado,user, "Usuario esperado");
         System.out.println("Inicio de Sesión correcto del usuario:"+ usuarioLogueado);
